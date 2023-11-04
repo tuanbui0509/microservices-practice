@@ -1,0 +1,53 @@
+@host_name=localhost
+@port=8080
+@host={{host_name}}:{{port}}
+@client_id=m2m.client
+@scope=productapi.read orderapi.read bankapi.read
+@client_secret=511536EF-F270-4058-80CA-1C89C192F69A
+@grant_type=client_credentials
+@token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjVERjYzNkE0NDk3ODIyQjM3QTExM0VDMDc5QUM0MDIyIiwidHlwIjoiYXQrand0In0.eyJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo4MDgwIiwibmJmIjoxNjk0NjgxMTU1LCJpYXQiOjE2OTQ2ODExNTUsImV4cCI6MTY5NDY4NDc1NSwiYXVkIjpbImJhbmthcGkiLCJvcmRlcmFwaSIsInByb2R1Y3RhcGkiLCJodHRwczovL2xvY2FsaG9zdDo4MDgwL3Jlc291cmNlcyJdLCJzY29wZSI6WyJiYW5rYXBpLnJlYWQiLCJvcmRlcmFwaS5yZWFkIiwicHJvZHVjdGFwaS5yZWFkIl0sImNsaWVudF9pZCI6Im0ybS5jbGllbnQiLCJqdGkiOiJDMDgzOUQ0ODU2ODlGNDg2NkY1RTA3ODE0OUY0RTkxRCJ9.w57tSsWAYquNT3NAJhadbZkeZDXBXY2iutBP1zK-YeHsvnCbJeKsZr0FFgPP_bVdY_DSaDzU1TDtQxJQsU75gYnGatGIfuzc-jlDIDQpc3Pwj8sF9gi_8QRjCXswRH7IolvTTzSGJR7w2Y3Jy3v9UIzb_NjQVjLwwQDKf3jZunspKSyqrDhObfOX5WqAsGryuo2I_GA2jyH8khLBHc1r6PdtP5fq8Tct1bEuJt6qv3JyWyXENNsP50Xqg6CKiLpTBm6ua2HZ6e-wbmcn3zavLKYnOU4HjCb7Sani24HfZhToduw8i-sX73OgSQjLfSwvcwhjxY6NZ55imztG3tIoJQ
+@userId=8d7811e8-05ea-40c9-97be-ac80c338cb55
+@productId=8d7811e8-05ea-40c9-97be-ac80c338cb55
+@orderId=68dd936e-769e-490b-b1ff-5fddaa03f8a8
+@paymentStatus=Succeeded
+###
+POST https://{{host}}/identity-api/connect/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Cache-Control: no-cache
+
+client_id={{client_id}}
+&scope={{scope}}
+&client_secret={{client_secret}}
+&grant_type={{grant_type}}
+
+###
+GET https://{{host}}/product-api/v1/product HTTP/1.1
+Authorization: bearer {{token}}
+Accept: */*
+
+### Send request to post Order
+POST https://{{host}}/order-api/v1/order HTTP/1.1
+Authorization: bearer {{token}}
+Accept: */*
+Content-Type: application/json
+
+{
+  "userId": "{{userId}}",
+  "orderId": "{{orderId}}"
+}
+
+### Verify order status
+
+### Send request to post Payment
+POST https://{{host}}/bank-api/v1/payment HTTP/1.1
+Authorization: bearer {{token}}
+Accept: */*
+Content-Type: application/json
+
+{
+  "orderId": "{{orderId}}",
+  "status": "{{paymentStatus}}"
+}
+
+
+### Verify order status
