@@ -4,15 +4,18 @@ using MSA.Common.Contracts.Domain;
 using MSA.Common.Contracts.Domain.Events.Product;
 using MSA.ProductService.Dtos;
 using MSA.ProductService.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MSA.ProductService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IRepository<Product> _repository;
         private readonly IPublishEndpoint publishEndpoint;
+
         public ProductController(
             IRepository<Product> repository,
              IPublishEndpoint publishEndpoint)
@@ -22,6 +25,7 @@ namespace MSA.ProductService.Controllers
         }
 
         [HttpGet]
+        [Authorize("read_access")]
         public async Task<IEnumerable<ProductDto>> GetAsync()
         {
             var products = (await _repository.GetAllAsync())
