@@ -31,7 +31,7 @@ namespace MSA.OrderService.Infrastructure.Data
             modelBuilder.Entity<Order>().HasKey(x => x.Id);
             modelBuilder.Entity<Order>().Property(x => x.Id)
                 .HasColumnType("uuid");
-                //.HasDefaultValueSql(_uuidAlgorithm);
+            //.HasDefaultValueSql(_uuidAlgorithm);
 
             //Order Details
             modelBuilder.Entity<OrderDetail>().ToTable("order_details");
@@ -39,7 +39,11 @@ namespace MSA.OrderService.Infrastructure.Data
             modelBuilder.Entity<OrderDetail>().Property(x => x.Id)
                 .HasColumnType("uuid")
                 .HasDefaultValueSql(_uuidAlgorithm);
-
+            //Product
+            modelBuilder.Entity<Product>().ToTable("products");
+            modelBuilder.Entity<Product>().HasKey(x => x.Id);
+            modelBuilder.Entity<Product>().Property(x => x.Id)
+                .HasColumnType("uuid");
             //Relationship
             modelBuilder.Entity<Order>()
                 .HasMany(x => x.OrderDetails);
