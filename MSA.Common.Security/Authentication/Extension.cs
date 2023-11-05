@@ -15,7 +15,7 @@ public static class Extensions
             {
                 var srvProvider = services.BuildServiceProvider();
                 var config = srvProvider.GetService<IConfiguration>();
-                var srvUrlsSetting = config.GetSection(nameof(ServiceUrlsSetting)).Get<ServiceUrlsSetting>();
+                var srvUrlsSetting = config.GetSection(nameof(ServiceUrlSetting)).Get<ServiceUrlSetting>();
 
                 options.Authority = srvUrlsSetting.IdentityServiceUrl;
                 options.RequireHttpsMetadata = false;

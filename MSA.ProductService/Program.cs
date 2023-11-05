@@ -31,7 +31,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
 
-var srvUrlsSetting = builder.Configuration.GetSection(nameof(ServiceUrlsSetting)).Get<ServiceUrlsSetting>();
+var srvUrlsSetting = builder.Configuration.GetSection(nameof(ServiceUrlSetting)).Get<ServiceUrlSetting>();
 builder.Services.AddSwaggerGen(options =>
 {
     var scheme = new OpenApiSecurityScheme

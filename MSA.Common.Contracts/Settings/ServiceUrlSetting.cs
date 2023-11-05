@@ -1,6 +1,6 @@
 namespace MSA.Common.Contracts.Settings
 {
-    public class ServiceUrlsSetting
+    public class ServiceUrlSetting
     {
         public string IdentityServiceUrl { get; set; }
         public string ProductServiceUrl { get; set; }

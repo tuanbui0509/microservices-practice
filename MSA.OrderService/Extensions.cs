@@ -1,7 +1,8 @@
 using Microsoft.OpenApi.Models;
+
 using MSA.Common.Contracts.Settings;
 
-namespace MSA.BankService
+namespace MSA.OrderService
 {
     public static class Extensions
     {
@@ -22,8 +23,8 @@ namespace MSA.BankService
                             TokenUrl = new Uri($"{srvUrlsSetting.IdentityServiceUrl}/connect/token"),
                             Scopes = new Dictionary<string, string>
                              {
-                                 { "bankapi.read", "Access read operations" },
-                                 { "bankapi.write", "Access write operations" }
+                                 { "orderapi.read", "Access read operations" },
+                                 { "orderapi.write", "Access write operations" }
                              }
                         }
                     },
